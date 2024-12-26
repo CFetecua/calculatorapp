@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
-import androidx.compose.ui.semantics.text
+//import androidx.compose.ui.semantics.text
 import java.lang.NumberFormatException
 
 class MainActivity : AppCompatActivity() {
