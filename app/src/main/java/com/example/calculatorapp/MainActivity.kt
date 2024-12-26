@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
 //import androidx.compose.ui.semantics.text
+//import androidx.compose.ui.semantics.text
 import java.lang.NumberFormatException
 
 class MainActivity : AppCompatActivity() {
@@ -41,6 +42,8 @@ class MainActivity : AppCompatActivity() {
         // Set click listeners for equals and decimal buttons
         findViewById<Button>(R.id.buttonEquals).setOnClickListener { onEqualsClick() }
         findViewById<Button>(R.id.buttonDecimal).setOnClickListener { onDecimalClick() }
+        // Set click listener for clear button
+        findViewById<Button>(R.id.buttonClear).setOnClickListener { onClearClick() }
     }
 
     private fun onNumberClick(button: Button) {
@@ -80,6 +83,13 @@ class MainActivity : AppCompatActivity() {
             currentInput += "."
             updateResultTextView()
         }
+    }
+
+    private fun onClearClick() {
+        currentInput = ""
+        operand1 = null
+        operator = null
+        resultTextView.text = "0"
     }
 
     private fun performOperation(operand1: Double, operand2: Double, operator: String): Double {
