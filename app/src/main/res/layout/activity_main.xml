@@ -7,30 +7,32 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+<!--    <TextView-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Hello World!"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
 
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:padding="16dp"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
 
         <TextView
             android:id="@+id/resultTextView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="36sp"
-            android:gravity="end"
+            android:layout_height="171dp"
             android:layout_marginBottom="16dp"
-            android:text="0"/>
+            android:gravity="end"
+            android:text="0"
+            android:textSize="36sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -40,28 +42,32 @@
             <Button
                 android:id="@+id/button7"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="66dp"
                 android:layout_weight="1"
-                android:text="7"/>
+                android:text="7" />
+
             <Button
                 android:id="@+id/button8"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="8"/>
+                android:text="8" />
+
             <Button
                 android:id="@+id/button9"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="9"/>
+                android:text="9" />
+
             <Button
                 android:id="@+id/buttonDivide"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="/"/>
+                android:text="/" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -70,28 +76,32 @@
             <Button
                 android:id="@+id/button4"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="73dp"
                 android:layout_weight="1"
-                android:text="4"/>
+                android:text="4" />
+
             <Button
                 android:id="@+id/button5"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="73dp"
                 android:layout_weight="1"
-                android:text="5"/>
+                android:text="5" />
+
             <Button
                 android:id="@+id/button6"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="73dp"
                 android:layout_weight="1"
-                android:text="6"/>
+                android:text="6" />
+
             <Button
                 android:id="@+id/buttonMultiply"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="73dp"
                 android:layout_weight="1"
-                android:text="*"/>
+                android:text="*" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -100,28 +110,32 @@
             <Button
                 android:id="@+id/button1"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="1"/>
+                android:text="1" />
+
             <Button
                 android:id="@+id/button2"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="2"/>
+                android:text="2" />
+
             <Button
                 android:id="@+id/button3"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="3"/>
+                android:text="3" />
+
             <Button
                 android:id="@+id/buttonSubtract"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="64dp"
                 android:layout_weight="1"
-                android:text="-"/>
+                android:text="-" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -130,33 +144,37 @@
             <Button
                 android:id="@+id/button0"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="70dp"
                 android:layout_weight="1"
-                android:text="0"/>
+                android:text="0" />
+
             <Button
                 android:id="@+id/buttonDecimal"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="70dp"
                 android:layout_weight="1"
-                android:text="."/>
+                android:text="." />
+
             <Button
                 android:id="@+id/buttonEquals"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="70dp"
                 android:layout_weight="1"
-                android:text="="/>
+                android:text="=" />
+
             <Button
                 android:id="@+id/buttonClear"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="70dp"
                 android:layout_weight="1"
-                android:text="C"/>
+                android:text="C" />
+
             <Button
                 android:id="@+id/buttonAdd"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="70dp"
                 android:layout_weight="1"
-                android:text="+"/>
+                android:text="+" />
         </LinearLayout>
     </LinearLayout>
 
