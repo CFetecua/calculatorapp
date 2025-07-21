@@ -13,7 +13,7 @@
         android:theme="@style/Theme.Calculatorapp"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name="com.camilo.calculatorapp.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
