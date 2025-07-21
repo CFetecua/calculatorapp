@@ -1,108 +1,102 @@
-package com.example.calculatorapp
+    package com.example.calculatorapp
 
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
-import android.widget.Button
-import android.widget.TextView
-//import androidx.compose.ui.semantics.text
-//import androidx.compose.ui.semantics.text
-import java.lang.NumberFormatException
+    import android.os.Bundle
+    import android.widget.Button
+    import android.widget.TextView
+    import androidx.appcompat.app.AppCompatActivity
+    import com.example.calculatorapp.R
 
-class MainActivity : AppCompatActivity() {
+    class MainActivity : AppCompatActivity() {
 
-    private lateinit var resultTextView: TextView
-    private var currentInput = ""
-    private var operand1: Double? = null
-    private var operator: String? = null
+        private lateinit var tvResult: TextView
+        private var input = ""
+        private var lastResult = ""
+        private var lastOperator = ""
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        override fun onCreate(savedInstanceState: Bundle?) {
+            super.onCreate(savedInstanceState)
+            setContentView(R.layout.activity_main)
 
-        resultTextView = findViewById(R.id.resultTextView)
+            tvResult = findViewById(R.id.tvResult)
 
-        // Set click listeners for number buttons
-        val numberButtonIds = listOf(
-            R.id.button0, R.id.button1, R.id.button2, R.id.button3,
-            R.id.button4, R.id.button5, R.id.button6, R.id.button7,
-            R.id.button8, R.id.button9
-        )
-        for (id in numberButtonIds) {
-            findViewById<Button>(id).setOnClickListener { onNumberClick(it as Button) }
-        }
+            val root = findViewById<android.widget.GridLayout>(R.id.gridLayout)
 
-        // Set click listeners for operator buttons
-        val operatorButtonIds = listOf(
-            R.id.buttonAdd, R.id.buttonSubtract, R.id.buttonMultiply, R.id.buttonDivide
-        )
-        for (id in operatorButtonIds) {
-            findViewById<Button>(id).setOnClickListener { onOperatorClick(it as Button) }
-        }
-
-        // Set click listeners for equals and decimal buttons
-        findViewById<Button>(R.id.buttonEquals).setOnClickListener { onEqualsClick() }
-        findViewById<Button>(R.id.buttonDecimal).setOnClickListener { onDecimalClick() }
-        // Set click listener for clear button
-        findViewById<Button>(R.id.buttonClear).setOnClickListener { onClearClick() }
-    }
-
-    private fun onNumberClick(button: Button) {
-        currentInput += button.text
-        updateResultTextView()
-    }
-
-    private fun onOperatorClick(button: Button) {
-        if (currentInput.isNotEmpty()) {
-            operand1 = currentInput.toDouble()
-            currentInput = ""
-        }
-        operator = button.text.toString()
-        updateResultTextView()
-    }
-
-    private fun onEqualsClick() {
-        if (operand1 != null && currentInput.isNotEmpty() && operator != null) {
-            try {
-                val operand2 = currentInput.toDouble()
-                val result = performOperation(operand1!!, operand2, operator!!)
-                resultTextView.text = result.toString()
-                currentInput = result.toString()
-                operand1 = null
-                operator = null
-            } catch (e: NumberFormatException) {
-                resultTextView.text = "Error"
-                currentInput = ""
-                operand1 = null
-                operator = null
+            for (i in 0 until root.childCount) {
+                val button = root.getChildAt(i) as Button
+                button.setOnClickListener {
+                    val text = button.text.toString()
+                    when (text) {
+                        "C" -> clear()
+                        "=" -> calculate()
+                        "+", "-", "×", "÷" -> operator(text)
+                        else -> number(text)
+                    }
+                }
             }
         }
-    }
 
-    private fun onDecimalClick() {
-        if (!currentInput.contains(".")) {
-            currentInput += "."
-            updateResultTextView()
+        private fun number(digit: String) {
+            input += digit
+            tvResult.text = input
+        }
+
+        private fun operator(op: String) {
+            if (input.isNotEmpty()) {
+                // Si ya hay resultado, continuar con nueva operación
+                if (lastResult.isNotEmpty()) {
+                    input = lastResult
+                    lastResult = ""
+                }
+
+                // Evitar doble operador seguido
+                if (!input.last().toString().matches(Regex("[+\\-×÷]"))) {
+                    input += op
+                    tvResult.text = input
+                }
+            }
+        }
+
+        private fun calculate() {
+            try {
+                val expression = input
+                    .replace("×", "*")
+                    .replace("÷", "/")
+                    .replace(Regex("([+\\-*/])"), " $1 ")  // Esto pone espacios entre operadores
+
+                val result = evalSimple(expression.trim())  // Quitamos espacios al principio y final
+                tvResult.text = result.toString()
+                lastResult = result.toString()
+                input = ""
+            } catch (e: Exception) {
+                tvResult.text = "Error"
+                input = ""
+            }
+        }
+
+        private fun clear() {
+            input = ""
+            lastResult = ""
+            lastOperator = ""
+            tvResult.text = "0"
+        }
+
+        private fun evalSimple(expression: String): Double {
+            val tokens = expression.split(" ")
+            var result = tokens[0].toDouble()
+
+            var i = 1
+            while (i < tokens.size) {
+                val operator = tokens[i]
+                val number = tokens[i + 1].toDouble()
+                result = when (operator) {
+                    "+" -> result + number
+                    "-" -> result - number
+                    "*" -> result * number
+                    "/" -> result / number
+                    else -> throw IllegalArgumentException("Operador no válido: $operator")
+                }
+                i += 2
+            }
+            return result
         }
     }
-
-    private fun onClearClick() {
-        currentInput = ""
-        operand1 = null
-        operator = null
-        resultTextView.text = "0"
-    }
-
-    private fun performOperation(operand1: Double, operand2: Double, operator: String): Double {
-        return when (operator) {
-            "+" -> operand1 + operand2
-            "-" -> operand1 - operand2
-            "*" -> operand1 * operand2
-            "/" -> if (operand2 != 0.0) operand1 / operand2 else throw ArithmeticException("Division by zero")
-            else -> throw IllegalArgumentException("Invalid operator")
-        }
-    }
-
-    private fun updateResultTextView() {
-        resultTextView.text = currentInput
-    }
-}
