@@ -12,6 +12,9 @@
         private var input = ""
         private var lastResult = ""
         private var lastOperator = ""
+        private var expression = ""
+        private var justEvaluated = false
+
 
         override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)
